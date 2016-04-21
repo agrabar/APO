@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 import pl.workspace.model.ImageModel;
 
-public class HistogramWindow extends JDialog implements Observer{	//zmien na JDialog
+public class HistogramWindow extends JDialog implements Observer{
 	
 	private ImageModel image_model;
 	private HistogramChart chart;
@@ -21,8 +21,9 @@ public class HistogramWindow extends JDialog implements Observer{	//zmien na JDi
 		chart = new HistogramChart(image_model);
 		add(chart);
 		pack();
+		setTitle("Histogram " + image_model.getName());
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setResizable(false);
+		//setResizable(false);
 		setVisible(true);
 	}
 

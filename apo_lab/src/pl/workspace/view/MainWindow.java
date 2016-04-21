@@ -5,7 +5,6 @@ import java.awt.Toolkit;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import pl.workspace.controller.WorkspaceController;
@@ -31,8 +30,7 @@ public class MainWindow extends JFrame{
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Throwable e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Blad przy ustawianiu LookAndFeel");
+			System.out.println("Blad przy ustawianiu LookAndFeel\n");
 		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -40,8 +38,7 @@ public class MainWindow extends JFrame{
 					MainWindow frame = new MainWindow();
 					WorkspaceController controller = new WorkspaceController(frame);
 				} catch (Exception e) {
-					e.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Blad glownego okna");
+					System.out.println("Blad glownego okna\n");
 				}
 			}
 		});

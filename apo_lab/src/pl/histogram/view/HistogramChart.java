@@ -28,10 +28,15 @@ public class HistogramChart extends JPanel{
 			//System.out.println(""+el);
 		}
 		for(int i = 0; i < histogram.length; ++i){
-			gr.setColor(Color.BLACK);
+			/*gr.setColor(Color.BLACK);
 			gr.fillRect(0 + i*3, getHeight() - (int)((getHeight()*histogram[i])/max), 3, (int)((getHeight()*histogram[i])/max));
 			gr.setColor(Color.GRAY);
-			gr.drawRect(0 + i*3, getHeight() - (int)((getHeight()*histogram[i])/max), 3, (int)((getHeight()*histogram[i])/max));
+			gr.drawRect(0 + i*3, getHeight() - (int)((getHeight()*histogram[i])/max), 3, (int)((getHeight()*histogram[i])/max));*/
+			
+			gr.setColor(Color.BLACK);
+			gr.fillRect(0 + i*getWidth()/256, getHeight() - (int)((getHeight()*histogram[i])/max), getWidth()/256, (int)((getHeight()*histogram[i])/max));
+			gr.setColor(Color.GRAY);
+			gr.drawRect(0 + i*getWidth()/256, getHeight() - (int)((getHeight()*histogram[i])/max), getWidth()/256, (int)((getHeight()*histogram[i])/max));
 		}
 	}
 	
