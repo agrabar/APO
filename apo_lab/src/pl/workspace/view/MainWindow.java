@@ -9,6 +9,7 @@ import javax.swing.UIManager;
 
 import pl.workspace.controller.WorkspaceController;
 
+//klasa glownego okna aplikacji
 public class MainWindow extends JFrame{
 	
 	private MyMenuBar menu_bar;

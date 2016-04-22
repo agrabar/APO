@@ -11,5 +11,7 @@ public interface MyMenuBarInterface {
 	public void menuLab1WyrownanieSasiedztwaClicked();
 	public void menuLab1WyrownanieWlasnaClicked();
 	
+	public void menuLab3FiltracjaClicked();
+	
 
 }

@@ -31,7 +31,7 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 	@Override
 	public void menuPlikOtworzClicked() {
 		JFileChooser chooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg", "jpeg", "png", "bmp");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg", "jpeg", "png", "bmp", "tif");
 		chooser.setFileFilter(filter);
 		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
 			File file = chooser.getSelectedFile();
@@ -86,8 +86,13 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 	public void menuLab1WyrownanieWlasnaClicked() {
 		HistogramUtil.equalizeHistogram(workspace.getSelectedWindow().getImageModel(), HistogramUtil.WLASNA);
 	}
-
 	
+	@Override
+	public void menuLab3FiltracjaClicked() {
+		// TODO Auto-generated method stub
+	}
+
+	//dodawanie listnerow do menubar
 	private void InitListeners(){
 		MyMenuBar menubar = (MyMenuBar)workspace.getJMenuBar();
 		
@@ -140,6 +145,14 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 			}
 		});
 		
+		menubar.addMenuLab3FiltracjaListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab3FiltracjaClicked();
+			}
+		});
+		
+		
 	}
 
 	@Override
@@ -154,6 +167,9 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 	@Override public void internalFrameDeiconified(InternalFrameEvent e) {}
 	@Override public void internalFrameActivated(InternalFrameEvent e) {}
 	@Override public void internalFrameDeactivated(InternalFrameEvent e) {}
+
+
+	
 	
 	
 }

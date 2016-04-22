@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import pl.workspace.model.ImageModel;
 
+//panel na ktorym rysuje histogram
 public class HistogramChart extends JPanel{
 	
 	private ImageModel image_model;

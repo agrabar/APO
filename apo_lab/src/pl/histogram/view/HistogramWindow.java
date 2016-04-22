@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import pl.workspace.model.ImageModel;
 
+//klasa do wyswietlania histogramu
 public class HistogramWindow extends JDialog implements Observer{
 	
 	private ImageModel image_model;
