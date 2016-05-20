@@ -13,6 +13,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import pl.histogram.view.HistogramWindow;
 import pl.lab1.HistogramUtil;
+import pl.lab3.filtracja_liniowa.FiltracjaController;
+import pl.lab3.filtracja_liniowa.FiltracjaWindow;
+import pl.lab3.filtracja_medianowa.MedianController;
+import pl.lab3.filtracja_medianowa.MedianWindow;
+import pl.lab3.gradient_sharpen.GradientSharpController;
+import pl.lab3.gradient_sharpen.GradientSharpWindow;
+import pl.lab3.uol.UOLController;
+import pl.lab3.uol.UOLWindow;
 import pl.workspace.model.ImageModel;
 import pl.workspace.view.ImageWindow;
 import pl.workspace.view.MainWindow;
@@ -31,7 +39,7 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 	@Override
 	public void menuPlikOtworzClicked() {
 		JFileChooser chooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg", "jpeg", "png", "bmp", "tif");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg", "jpeg", "png", "bmp");
 		chooser.setFileFilter(filter);
 		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
 			File file = chooser.getSelectedFile();
@@ -89,7 +97,26 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 	
 	@Override
 	public void menuLab3FiltracjaClicked() {
-		// TODO Auto-generated method stub
+		FiltracjaWindow fw = new FiltracjaWindow(workspace, workspace.getSelectedWindow().getImageModel());
+		new FiltracjaController(fw);
+	}
+	
+	@Override
+	public void menuLab3UOLClicked() {
+		UOLWindow uolw = new UOLWindow(workspace, workspace.getSelectedWindow().getImageModel());
+		new UOLController(uolw);
+	}
+	
+	@Override
+	public void menuLab3MedianowaClicked() {
+		MedianWindow mw = new MedianWindow(workspace, workspace.getSelectedWindow().getImageModel());
+		new MedianController(mw);
+	}
+	
+	@Override
+	public void menuLab3GradientClicked() {
+		GradientSharpWindow window = new GradientSharpWindow(workspace, workspace.getSelectedWindow().getImageModel());
+		new GradientSharpController(window);
 	}
 
 	//dodawanie listnerow do menubar
@@ -152,7 +179,26 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 			}
 		});
 		
+		menubar.addMenuLab3UOLListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab3UOLClicked();
+			}
+		});
 		
+		menubar.addMenuLab3MedianowaListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab3MedianowaClicked();
+			}
+		});
+		
+		menubar.addMenuLab3GradientListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab3GradientClicked();
+			}
+		});
 	}
 
 	@Override
@@ -170,6 +216,8 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 
 
 	
-	
+
+
+
 	
 }

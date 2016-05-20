@@ -41,4 +41,8 @@ public class HistogramChart extends JPanel{
 		}
 	}
 	
+	public void setImageModel(ImageModel image_model){
+		this.image_model = image_model;
+	}
+	
 }
