@@ -90,11 +90,23 @@ public class FiltracjaUtil {
 		}
 		
 		if(scaling == PROPORTIONAL){
-			for(int x = 0; x < raster.getWidth(); ++x){
+			/*for(int x = 0; x < raster.getWidth(); ++x){
 				for(int y = 0; y < raster.getHeight(); ++y){
 					new_value = (levels - 1) * (raster.getPixel(x, y, new double[1])[0] - min)/(max - min);
 					//System.out.println(raster.getPixel(x, y, new double[1])[0] - new_value);
 					raster_out.setPixel(x, y, new double[]{new_value});
+				}
+			}*/
+			for(int y = rows/2; y < raster.getHeight() - rows/2; ++y){
+				for(int x = cols/2; x < raster.getWidth() - cols/2; ++x){
+					for(int i = -rows/2; i <= rows/2; ++i){
+						for(int j = -cols/2; j <= cols/2; ++j){
+							new_value += raster.getPixel(x + j, y + i, new double[1])[0] * mask[rows/2 + i][cols/2 + j];
+						}
+					}
+					new_value = new_value/w;
+					raster_out.setPixel(x, y, new double[]{(levels - 1) * (new_value - min)/(max - min)});
+					new_value = 0;
 				}
 			}
 		}
