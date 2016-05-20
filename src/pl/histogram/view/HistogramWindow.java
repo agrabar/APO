@@ -24,12 +24,14 @@ public class HistogramWindow extends JDialog implements Observer{
 		pack();
 		setTitle("Histogram " + image_model.getName());
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setLocation(parent.getContentPane().getLocationOnScreen());
 		//setResizable(false);
 		setVisible(true);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
+		setTitle("Histogram " + image_model.getName());
 		repaint();
 	}
 	

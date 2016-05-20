@@ -30,6 +30,10 @@ public class MyMenuBar extends JMenuBar{
 	//sekcja lab3
 	private JMenu menuLab3;
 	private JMenuItem menuLab3Filtracja;
+	private JMenuItem menuLab3UOL;
+	private JMenuItem menuLab3Medianowa;
+	
+	private JMenuItem menuLab3Gradient;
 	
 	public MyMenuBar(){
 		InitComponents();
@@ -67,7 +71,15 @@ public class MyMenuBar extends JMenuBar{
 		//sekcja lab3
 		menuLab3 = new JMenu("Lab3");
 		menuLab3Filtracja = new JMenuItem("Filtracja liniowa");
+		menuLab3UOL = new JMenuItem("UOL");
+		menuLab3Medianowa = new JMenuItem("Filtracja medianowa");
+		
+		menuLab3Gradient = new JMenuItem("Gradientowe wyostrzanie");
 		menuLab3.add(menuLab3Filtracja);
+		menuLab3.add(menuLab3UOL);
+		menuLab3.add(menuLab3Medianowa);
+		
+		menuLab3.add(menuLab3Gradient);
 		
 		setEnabledSections(false);
 		add(menuPlik);
@@ -114,6 +126,18 @@ public class MyMenuBar extends JMenuBar{
 	//sekcja lab3
 	public void addMenuLab3FiltracjaListener(ActionListener listener){
 		menuLab3Filtracja.addActionListener(listener);
+	}
+	
+	public void addMenuLab3UOLListener(ActionListener listener){
+		menuLab3UOL.addActionListener(listener);
+	}
+	
+	public void addMenuLab3MedianowaListener(ActionListener listener){
+		menuLab3Medianowa.addActionListener(listener);
+	}
+	
+	public void addMenuLab3GradientListener(ActionListener listener){
+		menuLab3Gradient.addActionListener(listener);
 	}
 
 }

@@ -36,7 +36,7 @@ public class ImageModel extends Observable{
 		return name;
 	}
 	
-	public ImageModel duplicate(){
+	public ImageModel duplicate(){	//bez observerow
 		ImageModel cp = new ImageModel(new BufferedImage(image.getColorModel(), image.copyData(null), image.isAlphaPremultiplied(), null));
 		cp.name = name + " - Kopia";
 		return cp;
