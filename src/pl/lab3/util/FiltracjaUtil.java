@@ -23,6 +23,7 @@ public class FiltracjaUtil {
 		for(int i = 0; i < mask.length; ++i){
 			for(int j = 0; j < mask[i].length; ++j){
 				w = w + mask[i][j];
+				//w = w + Math.abs(mask[i][j]);
 				//System.out.print(mask[i][j] + " ");
 				/*if(mask[i][j] < 0){
 					w = 1;
@@ -58,7 +59,8 @@ public class FiltracjaUtil {
 							raster_out.setPixel(x, y, new int[]{0});
 						else
 						{
-							if(new_value >= levels)
+							//if(new_value >= levels)
+							if(new_value > 0)
 								raster_out.setPixel(x, y, new int[]{levels - 1});
 							else
 								raster_out.setPixel(x, y, new int[]{(levels - 1)/2});
@@ -70,7 +72,7 @@ public class FiltracjaUtil {
 							raster_out.setPixel(x, y, new int[]{0});
 						else
 						{
-							if(new_value >= levels)
+							if(new_value > levels - 1)
 								raster_out.setPixel(x, y, new int[]{levels - 1});
 							else
 								raster_out.setPixel(x, y, new double[]{new_value});

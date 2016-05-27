@@ -14,7 +14,7 @@ public interface MyMenuBarInterface {
 	public void menuLab3FiltracjaClicked();
 	public void menuLab3UOLClicked();
 	public void menuLab3MedianowaClicked();
-	
+	public void menuLab3LogicznaClicked();
 	public void menuLab3GradientClicked();
 	
 

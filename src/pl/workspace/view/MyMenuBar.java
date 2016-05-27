@@ -32,7 +32,7 @@ public class MyMenuBar extends JMenuBar{
 	private JMenuItem menuLab3Filtracja;
 	private JMenuItem menuLab3UOL;
 	private JMenuItem menuLab3Medianowa;
-	
+	private JMenuItem menuLab3Logiczna;
 	private JMenuItem menuLab3Gradient;
 	
 	public MyMenuBar(){
@@ -73,12 +73,12 @@ public class MyMenuBar extends JMenuBar{
 		menuLab3Filtracja = new JMenuItem("Filtracja liniowa");
 		menuLab3UOL = new JMenuItem("UOL");
 		menuLab3Medianowa = new JMenuItem("Filtracja medianowa");
-		
+		menuLab3Logiczna = new JMenuItem("Filtracja logiczna");
 		menuLab3Gradient = new JMenuItem("Gradientowe wyostrzanie");
 		menuLab3.add(menuLab3Filtracja);
 		menuLab3.add(menuLab3UOL);
 		menuLab3.add(menuLab3Medianowa);
-		
+		menuLab3.add(menuLab3Logiczna);
 		menuLab3.add(menuLab3Gradient);
 		
 		setEnabledSections(false);
@@ -134,6 +134,10 @@ public class MyMenuBar extends JMenuBar{
 	
 	public void addMenuLab3MedianowaListener(ActionListener listener){
 		menuLab3Medianowa.addActionListener(listener);
+	}
+	
+	public void addMenuLab3LogicznaListener(ActionListener listener){
+		menuLab3Logiczna.addActionListener(listener);
 	}
 	
 	public void addMenuLab3GradientListener(ActionListener listener){

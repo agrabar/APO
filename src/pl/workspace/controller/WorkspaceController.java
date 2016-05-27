@@ -15,6 +15,8 @@ import pl.histogram.view.HistogramWindow;
 import pl.lab1.HistogramUtil;
 import pl.lab3.filtracja_liniowa.FiltracjaController;
 import pl.lab3.filtracja_liniowa.FiltracjaWindow;
+import pl.lab3.filtracja_logiczna.LogicznaController;
+import pl.lab3.filtracja_logiczna.LogicznaWindow;
 import pl.lab3.filtracja_medianowa.MedianController;
 import pl.lab3.filtracja_medianowa.MedianWindow;
 import pl.lab3.gradient_sharpen.GradientSharpController;
@@ -33,6 +35,22 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 	public WorkspaceController(MainWindow workspace) {
 		this.workspace = workspace;
 		InitListeners();
+		
+		//obraz ladowany na pale
+		ImageModel im;
+		try {
+			File file = new File("Burnher.bmp");
+			im = new ImageModel(file);
+			ImageWindow iw = new ImageWindow(im);
+			workspace.getDesktopPane().add(iw);
+			iw.setSelected(true);
+			iw.addInternalFrameListener(this);
+			workspace.getMyMenuBar().setEnabledSections(true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (PropertyVetoException e) {
+			e.printStackTrace();
+		}
 	}
 	
 
@@ -52,8 +70,10 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 				workspace.getMyMenuBar().setEnabledSections(true);
 			} catch (IOException e) {
 				System.out.println("Blad ladowania z pliku");
+				e.printStackTrace();
 			} catch (PropertyVetoException e) {
 				System.out.println("Blad przy setSelected");
+				e.printStackTrace();
 			}
 		}
 	}
@@ -111,6 +131,12 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 	public void menuLab3MedianowaClicked() {
 		MedianWindow mw = new MedianWindow(workspace, workspace.getSelectedWindow().getImageModel());
 		new MedianController(mw);
+	}
+	
+	@Override
+	public void menuLab3LogicznaClicked() {
+		LogicznaWindow lw = new LogicznaWindow(workspace, workspace.getSelectedWindow().getImageModel());
+		new LogicznaController(lw);
 	}
 	
 	@Override
@@ -193,6 +219,13 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 			}
 		});
 		
+		menubar.addMenuLab3LogicznaListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab3LogicznaClicked();
+			}
+		});
+		
 		menubar.addMenuLab3GradientListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -213,10 +246,6 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 	@Override public void internalFrameDeiconified(InternalFrameEvent e) {}
 	@Override public void internalFrameActivated(InternalFrameEvent e) {}
 	@Override public void internalFrameDeactivated(InternalFrameEvent e) {}
-
-
-	
-
 
 
 	

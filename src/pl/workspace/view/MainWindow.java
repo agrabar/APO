@@ -2,12 +2,15 @@ package pl.workspace.view;
 
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 import pl.workspace.controller.WorkspaceController;
+import pl.workspace.model.ImageModel;
 
 //klasa glownego okna aplikacji
 public class MainWindow extends JFrame{

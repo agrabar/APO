@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -55,12 +56,13 @@ public class FiltracjaWindow extends JDialog implements Observer{
 		operation.addItem("Wygladzanie");
 		operation.addItem("Wyostrzanie");
 		operation.addItem("Detekcja krawedzi");
-		operation.addItem("Uniwersalna operacja liniowa");
+		operation.addItem("Obraz pierwotny");
 		operation.setMaximumSize(new Dimension(200, 20));
 		operation.setMinimumSize(new Dimension(200, 20));
 		operation.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panel_left.add(Box.createRigidArea(new Dimension(10, 10)));
 		panel_left.add(operation);
+		operation.setSelectedIndex(3);
 		
 		//ComboBox maski
 		mask = new JComboBox<String>();
@@ -73,6 +75,7 @@ public class FiltracjaWindow extends JDialog implements Observer{
 		mask.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panel_left.add(Box.createRigidArea(new Dimension(10, 10)));
 		panel_left.add(mask);
+		mask.setEnabled(false);
 		
 		//MaskPanel
 		panel_left.add(Box.createRigidArea(new Dimension(10, 10)));
@@ -168,10 +171,10 @@ public class FiltracjaWindow extends JDialog implements Observer{
 		mask_panel.addMaskListeners(listener);
 	}
 	
-	public void addRadioButtonsListener(ActionListener listener){
-		proportional.addActionListener(listener);
-		three_valued.addActionListener(listener);
-		cutting.addActionListener(listener);
+	public void addRadioButtonsListener(ItemListener listener){
+		proportional.addItemListener(listener);
+		three_valued.addItemListener(listener);
+		cutting.addItemListener(listener);
 	}
 	
 	public MaskPanel getMaskPanel(){

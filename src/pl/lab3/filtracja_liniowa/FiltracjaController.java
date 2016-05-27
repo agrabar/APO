@@ -2,12 +2,12 @@ package pl.lab3.filtracja_liniowa;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
 
 import pl.lab3.util.FiltracjaUtil;
-import pl.workspace.model.ImageModel;
 
 public class FiltracjaController {
 	
@@ -152,22 +152,23 @@ public class FiltracjaController {
 					case 0:{
 						filtracja_window.enableRadioGroup(false);
 						filtracja_window.getMask().setEnabled(true);
-						filtracja_window.getMaskPanel().enableMask(false);
+						//filtracja_window.getMaskPanel().enableMask(false);
 						mask.setSelectedIndex(0);
 						break;
 					}
 					case 3:{
 						filtracja_window.getMask().setEnabled(false);
-						filtracja_window.enableRadioGroup(true);
-						filtracja_window.getMaskPanel().enableMask(true);
+						filtracja_window.enableRadioGroup(false);
+						//filtracja_window.getMaskPanel().enableMask(true);
 						filtracja_window.getPreviewImage().restoreImageModel(filtracja_window);
 						filtracja_window.getPreviewImage().getImageModel().modelChanged();
+						filtracja_window.updateHistogramChart();
 						break;
 					}
 					default:{
 						filtracja_window.enableRadioGroup(true);
 						filtracja_window.getMask().setEnabled(true);
-						filtracja_window.getMaskPanel().enableMask(false);
+						//filtracja_window.getMaskPanel().enableMask(false);
 						mask.setSelectedIndex(0);
 						break;
 					}
@@ -182,17 +183,19 @@ public class FiltracjaController {
 			}
 		});
 		
-		filtracja_window.addRadioButtonsListener(new ActionListener() {
+		filtracja_window.addRadioButtonsListener(new ItemListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				maskChanged();
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange() == ItemEvent.SELECTED)
+					maskChanged();
 			}
 		});
 		
 		filtracja_window.addButtonConfirmListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				FiltracjaUtil.filter(filtracja_window.getImageModel(), filtracja_window.getMaskPanel().getMask(), getScaling(), 256);
+				if(filtracja_window.getOperation().getSelectedIndex() != 3)
+					FiltracjaUtil.filter(filtracja_window.getImageModel(), filtracja_window.getMaskPanel().getMask(), getScaling(), 256);
 				filtracja_window.dispose();
 			}
 		});
@@ -204,7 +207,7 @@ public class FiltracjaController {
 			}
 		});
 		
-		filtracja_window.addMaskPanelListeners(new ActionListener() {
+		/*filtracja_window.addMaskPanelListeners(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(filtracja_window.getOperation().getSelectedIndex() == 3){
@@ -212,7 +215,7 @@ public class FiltracjaController {
 					maskChanged();
 				}
 			}
-		});
+		});*/
 		
 	}
 	
