@@ -117,7 +117,7 @@ public class MaskView extends JDialog implements Observer{
 		panel_radio.add(proportional);
 		panel_radio.add(three_valued);
 		panel_radio.add(cutting);
-		//proportional.setSelected(true);
+		proportional.setSelected(true);
 		panel_left.add(panel_radio);
 		
 		//button_confirm + button_cancel

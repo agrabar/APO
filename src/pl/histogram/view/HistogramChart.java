@@ -12,6 +12,7 @@ import pl.workspace.model.ImageModel;
 public class HistogramChart extends JPanel{
 	
 	private ImageModel image_model;
+	private double[] histogram;
 	
 	public HistogramChart(ImageModel image_model){
 		this.image_model = image_model;
@@ -20,10 +21,15 @@ public class HistogramChart extends JPanel{
 		//setBackground(Color.WHITE);
 	}
 	
+	public double[] getHist(){
+		return histogram;
+	}
+	
 	@Override
 	protected void paintComponent(Graphics gr) {
 		super.paintComponent(gr);
-		double[] histogram = image_model.getHistogram();
+		//double[] histogram = image_model.getHistogram();
+		histogram = image_model.getHistogram();
 		double max = 1;
 		for(double el : histogram){
 			if(max < el) max = el;
