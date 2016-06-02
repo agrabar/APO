@@ -188,6 +188,10 @@ public class MaskView extends JDialog implements Observer{
 		return preview;
 	}
 	
+	public ImageModel getImageModel(){
+		return image_model;
+	}
+	
 	public void updateHistogramChart(){
 		histogram.setImageModel(preview.getImageModel());
 	}
@@ -203,6 +207,13 @@ public class MaskView extends JDialog implements Observer{
 				mask2[i][j].addActionListener(listener);
 			}
 		}
+	}
+	
+	public JRadioButton getSelectedRadioButton(){
+		if(proportional.isSelected()) return proportional;
+		if(three_valued.isSelected()) return three_valued;
+		if(cutting.isSelected()) return cutting;
+		return null;
 	}
 	
 	public int[][] getMask1(){
@@ -247,5 +258,9 @@ public class MaskView extends JDialog implements Observer{
 				mask_out[i][j].setText("" + mask[i][j]);
 			}
 		}
+	}
+	
+	public void updateMask(){
+		setMaskOut(TwoMasks.getMask(getMask1(), getMask2()));
 	}
 }
