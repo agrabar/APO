@@ -68,6 +68,9 @@ public class LogicznaWindow extends JDialog implements Observer{
 		preview = new PreviewImage(model);
 		preview.getImageModel().addObserver(this);
 		histogram = new HistogramChart(preview.getImageModel());
+		histogram.setMaximumSize(new Dimension(300, 300));
+		histogram.setMinimumSize(new Dimension(300, 300));
+		histogram.setPreferredSize(new Dimension(300, 300));
 		
 		//panel bot
 		panel_bot.add(preview);

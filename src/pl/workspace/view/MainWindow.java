@@ -9,6 +9,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
+import pl.misc.ImageGenerator;
 import pl.workspace.controller.WorkspaceController;
 import pl.workspace.model.ImageModel;
 
@@ -41,6 +42,7 @@ public class MainWindow extends JFrame{
 				try {
 					MainWindow frame = new MainWindow();
 					WorkspaceController controller = new WorkspaceController(frame);
+					//ImageGenerator.generate3();
 				} catch (Exception e) {
 					System.out.println("Blad glownego okna\n");
 				}

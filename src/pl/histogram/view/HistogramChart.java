@@ -17,6 +17,7 @@ public class HistogramChart extends JPanel{
 		this.image_model = image_model;
 		setPreferredSize(new Dimension(768, 500));
 		setBackground(Color.LIGHT_GRAY);
+		//setBackground(Color.WHITE);
 	}
 	
 	@Override

@@ -11,6 +11,7 @@ public class LogicznaUtil {
 	public static void logical(ImageModel model, int direction){
 		WritableRaster raster_out = model.getImage().getRaster();
 		WritableRaster raster = model.getImage().copyData(null);
+		//WritableRaster raster = model.duplicate().getImage().getRaster();
 		int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0;
 		int pixel1, pixel2;
 		

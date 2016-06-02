@@ -56,7 +56,8 @@ public class LogicznaController {
 					}*/
 					method = getDirection((JRadioButton)e.getSource());
 					//System.out.println(method);
-					LogicznaUtil.logical(logiczna_window.getPreviewImage().getImageModel(), method);
+					//LogicznaUtil.logical(logiczna_window.getPreviewImage().getImageModel(), method);
+					LogicznaUtil.logical(logiczna_window.getPreviewImage().getImageModel(), logiczna_window.getSelectedDirection());
 					logiczna_window.updateHistogramChart();
 				}
 			}

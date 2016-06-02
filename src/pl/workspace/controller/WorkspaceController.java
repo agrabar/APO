@@ -5,8 +5,16 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Enumeration;
 
+import javax.swing.AbstractButton;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -23,6 +31,10 @@ import pl.lab3.gradient_sharpen.GradientSharpController;
 import pl.lab3.gradient_sharpen.GradientSharpWindow;
 import pl.lab3.uol.UOLController;
 import pl.lab3.uol.UOLWindow;
+import pl.lab4.mask.MaskController;
+import pl.lab4.mask.MaskView;
+import pl.lab4.util.MorphologicUtil;
+import pl.lab5.util.CompressionUtil;
 import pl.workspace.model.ImageModel;
 import pl.workspace.view.ImageWindow;
 import pl.workspace.view.MainWindow;
@@ -144,6 +156,119 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 		GradientSharpWindow window = new GradientSharpWindow(workspace, workspace.getSelectedWindow().getImageModel());
 		new GradientSharpController(window);
 	}
+	
+	@Override
+	public void menuLab4MorfErozja4Clicked() {
+		MorphologicUtil.erosion(workspace.getSelectedWindow().getImageModel(), MorphologicUtil.ROMB, 256);
+	}
+
+	@Override
+	public void menuLab4MorfErozja8Clicked() {
+		MorphologicUtil.erosion(workspace.getSelectedWindow().getImageModel(), MorphologicUtil.KWADRAT, 256);
+	}
+
+	@Override
+	public void menuLab4MorfDylatacja4Clicked() {
+		MorphologicUtil.dilation(workspace.getSelectedWindow().getImageModel(), MorphologicUtil.ROMB);
+	}
+
+	@Override
+	public void menuLab4MorfDylatacja8Clicked() {
+		MorphologicUtil.dilation(workspace.getSelectedWindow().getImageModel(), MorphologicUtil.KWADRAT);
+	}
+
+	@Override
+	public void menuLab4MorfOtwarcie4Clicked() {
+		MorphologicUtil.opening(workspace.getSelectedWindow().getImageModel(), MorphologicUtil.ROMB, 256);
+	}
+
+	@Override
+	public void menuLab4MorfOtwarcie8Clicked() {
+		MorphologicUtil.opening(workspace.getSelectedWindow().getImageModel(), MorphologicUtil.KWADRAT, 256);
+	}
+
+	@Override
+	public void menuLab4MorfZamkniecie4Clicked() {
+		MorphologicUtil.closing(workspace.getSelectedWindow().getImageModel(), MorphologicUtil.ROMB, 256);
+	}
+
+	@Override
+	public void menuLab4MorfZamkniecie8Clicked() {
+		MorphologicUtil.opening(workspace.getSelectedWindow().getImageModel(), MorphologicUtil.KWADRAT, 256);
+	}
+	
+	@Override
+	public void menuLab4MaskiClicked() {
+		MaskView maskview = new MaskView(workspace, workspace.getSelectedWindow().getImageModel());
+		new MaskController(maskview);
+	}
+	
+	@Override
+	public void menuLab5RLEClicked() {
+		//System.out.println("RLE");
+		ImageModel im = workspace.getSelectedWindow().getImageModel();
+		int kp = im.getImage().getHeight() * im.getImage().getWidth();
+		int kw = CompressionUtil.RLE(im);
+		JOptionPane.showMessageDialog(workspace, "KP = " + kp +"\nKW = " + kw +"\nSK = " + (double)kp/(double)kw);
+	}
+
+	@Override
+	public void menuLab5READClicked() {
+		ImageModel im = workspace.getSelectedWindow().getImageModel();
+		int kp = im.getImage().getHeight() * im.getImage().getWidth();
+		int kw = CompressionUtil.READ(im);
+		JOptionPane.showMessageDialog(workspace, "KP = " + kp +"\nKW = " + kw +"\nSK = " + (double)kp/(double)kw);
+	}
+
+	@Override
+	public void menuLab5HuffmanClicked() {
+		ImageModel im = workspace.getSelectedWindow().getImageModel();
+		int kp = im.getImage().getHeight() * im.getImage().getWidth();
+		int kw = CompressionUtil.huffman(im);
+		JOptionPane.showMessageDialog(workspace, "KP = " + kp +"\nKW = " + kw +"\nSK = " + (double)kp/(double)kw);	
+	}
+
+	@Override
+	public void menuLab5blokowaClicked() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		JLabel label = new JLabel("Wybierz wielkosc bloku");
+		ButtonGroup bg = new ButtonGroup();
+		JRadioButton but4 = new JRadioButton("4");
+		JRadioButton but8 = new JRadioButton("8");
+		JRadioButton but16 = new JRadioButton("16");
+		JRadioButton but32 = new JRadioButton("32");
+		bg.add(but4);
+		bg.add(but8);
+		bg.add(but16);
+		bg.add(but32);
+		but4.setSelected(true);
+		
+		panel.add(label);
+		panel.add(but4);
+		panel.add(but8);
+		panel.add(but16);
+		panel.add(but32);
+		
+		if(JOptionPane.showConfirmDialog(workspace, panel, "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION){
+			Enumeration<AbstractButton> buttons = bg.getElements();
+			while(buttons.hasMoreElements()){
+				AbstractButton cur = buttons.nextElement();
+				if(cur.isSelected())
+				{
+					if(!CompressionUtil.blocks(workspace.getSelectedWindow().getImageModel(), Integer.parseInt(cur.getText())))
+						JOptionPane.showMessageDialog(workspace, "Obrazek o niepoprawnych wymiarach", "", JOptionPane.ERROR_MESSAGE);
+					break;
+				}
+			}
+			//System.out.println(workspace.getSelectedWindow().getImageModel().getImage().getWidth() + " x " + workspace.getSelectedWindow().getImageModel().getImage().getHeight());
+		}
+	}
+
+	@Override
+	public void menuLab5drzewoClicked() {
+		System.out.println("drzewo");
+	}
 
 	//dodawanie listnerow do menubar
 	private void InitListeners(){
@@ -232,6 +357,104 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 				menuLab3GradientClicked();
 			}
 		});
+		
+		menubar.addMenuLab4MorfErozja4(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab4MorfErozja4Clicked();
+			}
+		});
+		
+		menubar.addMenuLab4MorfErozja8(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab4MorfErozja8Clicked();
+			}
+		});
+		
+		menubar.addMenuLab4MorfDylatacja4(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab4MorfDylatacja4Clicked();
+			}
+		});
+		
+		menubar.addMenuLab4MorfDylatacja8(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab4MorfDylatacja8Clicked();
+			}
+		});
+		
+		menubar.addMenuLab4MorfOtwarcie4(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab4MorfOtwarcie4Clicked();
+			}
+		});
+		
+		menubar.addMenuLab4MorfOtwarcie8(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab4MorfOtwarcie8Clicked();
+			}
+		});
+		
+		menubar.addMenuLab4MorfZamkniecie4(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab4MorfZamkniecie4Clicked();
+			}
+		});
+		
+		menubar.addMenuLab4MorfZamkniecie8(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab4MorfZamkniecie8Clicked();
+			}
+		});
+		
+		menubar.addMenuLab4MaskiListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab4MaskiClicked();
+			}
+		});
+		
+		menubar.addMenuLab5RLEListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab5RLEClicked();
+			}
+		});
+		
+		menubar.addMenuLab5READListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab5READClicked();
+			}
+		});
+		
+		menubar.addMenuLab5HuffmanListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab5HuffmanClicked();
+			}
+		});
+		
+		menubar.addMenuLab5blokowaListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab5blokowaClicked();
+			}
+		});
+		
+		menubar.addMenuLab5drzewoListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menuLab5drzewoClicked();
+			}
+		});
 	}
 
 	@Override
@@ -249,4 +472,7 @@ public class WorkspaceController implements MyMenuBarInterface, InternalFrameLis
 
 
 	
+
+
+		
 }

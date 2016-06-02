@@ -17,5 +17,20 @@ public interface MyMenuBarInterface {
 	public void menuLab3LogicznaClicked();
 	public void menuLab3GradientClicked();
 	
-
+	public void menuLab4MorfErozja4Clicked();
+	public void menuLab4MorfErozja8Clicked();
+	public void menuLab4MorfDylatacja4Clicked();
+	public void menuLab4MorfDylatacja8Clicked();
+	public void menuLab4MorfOtwarcie4Clicked();
+	public void menuLab4MorfOtwarcie8Clicked();
+	public void menuLab4MorfZamkniecie4Clicked();
+	public void menuLab4MorfZamkniecie8Clicked();
+	public void menuLab4MaskiClicked();
+	
+	
+	public void menuLab5RLEClicked();
+	public void menuLab5READClicked();
+	public void menuLab5HuffmanClicked();
+	public void menuLab5blokowaClicked();
+	public void menuLab5drzewoClicked();
 }
